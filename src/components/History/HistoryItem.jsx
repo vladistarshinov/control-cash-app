@@ -4,8 +4,13 @@ import React, { Component } from 'react';
 class HistoryItem extends Component {
     render() {
         return (
-             <li className="history__item history__item-plus">Получил зарплату
-                <span className="history__money">+30000 ₽</span>
+            <li className={`history__item history__item-${this.props.transaction.plus 
+                    ? 'plus'
+                    : 'minus'
+                }`
+            }>
+                {this.props.transaction.description}
+                <span className="history__money">{this.props.transaction.amount}</span>
                 <button className="history__delete">x</button>
             </li>
         )

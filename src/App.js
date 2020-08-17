@@ -12,22 +12,26 @@ class App extends Component {
     amount: ''
 }
 
-handleTransaction(plus) {
+handleTransaction = plus => {
   const transactions = [...this.state.transactions];
-    const transaction = {
-        id: `cm-${(+new Date()).toString(16)}`,
-        description: this.state.description,
-        amount: this.state.amount,
-        plus
-    }
-
-    transactions.push(transaction);
-    console.log(transactions);
+  transactions.push({
+    id: `cm-${(+new Date()).toString(16)}`,
+    description: this.state.description,
+    amount: this.state.amount,
+    plus
+  });
+  this.setState({ transactions, description: '', amount: '' }, () => console.log(this.state));
 }
 
-handleDescription = e => this.setState({ description: e.target.value });
+handleDescription = e => {
+  e.preventDefault();
+  this.setState({ description: e.target.value })
+};
 
-handleAmount = e => this.setState({ amount: e.target.value });
+handleAmount = e => {
+  e.preventDefault();
+  this.setState({ amount: e.target.value });
+}
 
 
   render() {
@@ -39,11 +43,13 @@ handleAmount = e => this.setState({ amount: e.target.value });
         <main>
           <div className="container">
             <Balance />
-            <History />
+            <History transactions={this.state.transactions} />
             <Operations 
               handleTransaction={this.handleTransaction} 
               handleDescription={this.handleDescription}
               handleAmount={this.handleAmount}
+              description={this.state.description}
+              amount={this.state.amount}
             />
           </div>
         </main>

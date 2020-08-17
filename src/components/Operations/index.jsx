@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class Operations extends Component {
     render() {
         return (
@@ -12,6 +11,7 @@ class Operations extends Component {
                             type="text" 
                             className="operation__fields operation__name" 
                             placeholder="Наименование операции"
+                            value={this.props.description}
                             onChange={this.props.handleDescription} 
                         />
                     </label>
@@ -20,18 +20,19 @@ class Operations extends Component {
                             type="number" 
                             className="operation__fields operation__amount" 
                             placeholder="Введите сумму" 
+                            value={this.props.amount}
                             onChange={this.props.handleAmount}
                         />
                     </label>
                     <div className="operation__btns">
                         <button 
                             onClick={() => this.props.handleTransaction(false)}
-                            type="submit" 
+                            type="button" 
                             className="operation__btn operation__btn-subtract"
                         >РАСХОД</button>
                         <button 
                             onClick={() => this.props.handleTransaction(true)}
-                            type="submit" 
+                            type="button" 
                             className="operation__btn operation__btn-add"
                         >ДОХОД</button>
                     </div>
